@@ -1,11 +1,14 @@
 // Assignment code here
-// Upon button click, series of prompts should appear asking user for password criteria.
 
-// What are the Prompts?
-
-
+// secure password will be stored in here
+var yourSecurePassword = "";
 // set a default length for password
 var passwordLength = 8;
+var alphabet = 'abcdefghijklmnopqrstuvwxyz'
+var lowerCaseCharacters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+var upperCaseCharacters = alphabet.toUpperCase().split('');
+console.log(upperCaseCharacters);
+console.log(lowerCaseCharacters); 
 
 // function for choosing the length of the password
 var critieriaForLenght = function(){
