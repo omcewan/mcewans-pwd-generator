@@ -29,16 +29,19 @@ var randomCharacterSelect = {
   symbol: getRandomSymbol,
 }
 
-
-// secure password will be stored in here
-var yourSecurePassword = "";
 // set a default length for password
 var passwordLength = 8;
-
-
+// will set to the choice of  having lower case in the password
+var chooseLowerCase
+// will set to the choice of having upper case in the password
+var chooseUpperCase
+// will set to the choice of having numbers in the password
+var chooseNumber
+// will set to the choice of having symbols in the password
+var chooseSymbol
 
 // function for choosing the length of the password
-var critieriaForLenght = function(){
+var criteriaForLenght = function(){
   // ask the user to choose a length for their password
   var userChosenLength = window.prompt('Choose a length for your password. Must be at least 8 characters, no longer than 128.', 8);
   // check to see if the choosen number is within the parameter range
@@ -54,68 +57,87 @@ var critieriaForLenght = function(){
     passwordLength = userChosenLength;
   }
   else{
-    critieriaForLenght();
+    criteriaForLenght();
   }
 }
 
-// Choose characters to include so will need a prompt for numbers.
-var choiceOfNumbers = window.confirm('Would you like to include numbers?');
-if (choiceOfNumbers){
-  choiceOfNumbers = true;
-}
-else{
-  choiceOfNumbers = false;
-}
-console.log(choiceOfNumbers)
-
-// //  prompt to ask if to include lowercase letters
-var choiceOfLowercase = window.confirm('Would you like to include lowercase letters?');
-if (choiceOfLowercase){
-  choiceOfNumbers = true;
-}
-else{
-  choiceOfLowercase = false;
+// check if the user wants to have lower case letter
+var criteriaForLowerCase = function(){
+  // ask the user if they would like to have lower case letters
+  var userLowerCaseChoice = window.confirm('Would you like lower case letters in your password?');
+  if (userLowerCaseChoice){
+    // will be set to true
+    chooseLowerCase = userLowerCaseChoice;
+  }
+  else {
+    chooseLowerCase = false;
+  }
 }
 
-// // prompt to ask if to inculde upper case letters
-var choiceOfUppercase = window.confirm('Would you like to include Uppercase letters?');
-if (choiceOfUppercase){
-  choiceOfNumbers = true;
-}
-else{
-  choiceOfUppercase = false;
-}
-
-// // prompt to ask if to include special characters
-var choiceOfSpecial = window.confirm('Would you like to include Special letters?');
-if (choiceOfSpecial){
-  choiceOfNumbers = true;
-}
-else{
-  choiceOfSpecial = false;
+// check if the user wants to have upper case letter
+var criteriaForUpperCase = function(){
+  // ask the user if they would like to have lower case letters
+  var userUpperCaseChoice = window.confirm('Would you like upper case letters in your password?');
+  if (userUpperCaseChoice){
+    // will be set to true
+    chooseUpperCase = userUpperCaseChoice;
+  }
+  else {
+    chooseUpperCase = false;
+  }
 }
 
+// check if the user wants to have number case letter
+var criteriaForNumber = function(){
+  // ask the user if they would like to have lower case letters
+  var userNumberChoice = window.confirm('Would you like numbers in your password?');
+  if (userNumberChoice){
+    // will be set to true
+    chooseNumber = userNumberChoice;
+  }
+  else {
+    chooseNumber = false;
+  }
+}
+
+// check if the user wants to have lower case letter
+var criteriaForSymbol = function(){
+  // ask the user if they would like to have lower case letters
+  var userSymbolChoice = window.confirm('Would you like symbols in your password?');
+  if (userSymbolChoice){
+    // will be set to true
+    chooseSymbol = userSymbolChoice;
+  }
+  else {
+    chooseSymbol = false;
+  }
+}
+
+criteriaForLowerCase();
+criteriaForUpperCase();
+criteriaForNumber();
+criteriaForSymbol();
+
+console.log(chooseLowerCase);
+console.log(chooseUpperCase);
+console.log(chooseNumber);
+console.log(chooseSymbol);
 
 
+// secure password will be stored in here
+var yourSecurePassword = "";
 
 // Get references to the #generate element
-// var generateBtn = document.querySelector("#generate");
+var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-// function writePassword() {
-  //   var password = generatePassword();
-  //   var passwordText = document.querySelector("#password");
+function writePassword() {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
   
-  //   passwordText.value = password;
+    passwordText.value = password;
   
-  // }
+  }
   
   // Add event listener to generate button
-  // generateBtn.addEventListener("click", writePassword);
-  
-  // My Pseudo Code
-  // choices need to be validated for each prompt
-  
-  // password is then generated after prompts are confirmed.
-  
-  // password is then displayed in an alert or in the text box.
+  generateBtn.addEventListener("click", writePassword);
