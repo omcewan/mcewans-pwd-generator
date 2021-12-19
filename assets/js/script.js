@@ -1,14 +1,41 @@
 // Assignment code here
 
+// Generator functions
+// To get random lowercase letter
+var getRandomLower = function(){
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+}
+
+// To get random uppercase letter
+var getRandomUpper = function(){
+  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+}
+
+// To get random number
+var getRandomNumber = function(){
+  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+}
+
+// to get random symbol
+var getRandomSymbol = function(){
+  var symbol = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+  return symbol[Math.floor(Math.random() * symbol.length)]
+}
+
+var randomCharacterSelect = {
+  lower: getRandomLower,
+  upper: getRandomUpper,
+  number: getRandomNumber,
+  symbol: getRandomSymbol,
+}
+
+
 // secure password will be stored in here
 var yourSecurePassword = "";
 // set a default length for password
 var passwordLength = 8;
-var alphabet = 'abcdefghijklmnopqrstuvwxyz'
-var lowerCaseCharacters = 'abcdefghijklmnopqrstuvwxyz'.split('');
-var upperCaseCharacters = alphabet.toUpperCase().split('');
-console.log(upperCaseCharacters);
-console.log(lowerCaseCharacters); 
+
+
 
 // function for choosing the length of the password
 var critieriaForLenght = function(){
@@ -72,7 +99,7 @@ else{
 
 
 // Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+// var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 // function writePassword() {
