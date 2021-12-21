@@ -133,14 +133,11 @@ var generatedPassword = function(){
   for (let i = 0; i <= +passwordLength; i++){
     if (chooseLowerCase){
       generatePassword += randomCharacterSelect.lower();
-      i++;
     }
     if (chooseUpperCase){
       generatePassword += randomCharacterSelect.upper();
-      i++
     }if (chooseNumber){
       generatePassword += randomCharacterSelect.number();
-      i++
     }
     if (chooseSymbol){
       generatePassword += randomCharacterSelect.symbol();
