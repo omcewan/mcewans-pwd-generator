@@ -136,7 +136,8 @@ var generatedPassword = function(){
     }
     if (chooseUpperCase){
       generatePassword += randomCharacterSelect.upper();
-    }if (chooseNumber){
+    }
+    if (chooseNumber){
       generatePassword += randomCharacterSelect.number();
     }
     if (chooseSymbol){
