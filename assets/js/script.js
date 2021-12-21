@@ -5,23 +5,19 @@
 var getRandomLower = function(){
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
-
 // To get random uppercase letter
 var getRandomUpper = function(){
   return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 }
-
 // To get random number
 var getRandomNumber = function(){
   return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
 }
-
 // to get random symbol
 var getRandomSymbol = function(){
   var symbol = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
   return symbol[Math.floor(Math.random() * symbol.length)]
 }
-
 // objects containing the functions needed for chooseing the characters of the password
 var randomCharacterSelect = {
   lower: getRandomLower,
@@ -37,20 +33,20 @@ var passwordLength
 // function for choosing the length of the password
 var criteriaForLength = function(){
   // ask the user to choose a length for their password
-  var userChosenLength = window.prompt('Choose a length for your password. Must be at least 8 characters, no longer than 128.', );
+  var userChosenLength = window.prompt('Choose a length for your password. Must be at least 8 characters, no longer than 128.', 8);
   // check to see if the choosen number is within the parameter range
   if (userChosenLength >= 8 && userChosenLength <= 128){
     // ask the user to confirm the length chosen.
-    var userConfirmedLength = window.confirm('Are you sure this is the length you want for your password?');
-  }
-  else {
-    var userChosenLength = window.prompt('Not a valid choice. Must be at least 8 characters, no longer than 128.', );
-  }
-  // if length chosen is confirmed assign to passwordLength else run function over.
-  if (userChosenLength){
-    passwordLength = +userChosenLength;
+    var userConfirmedLength = window.confirm(`Are you sure ${userChosenLength} is the length you want for your password?`);
+    if (userConfirmedLength){
+      passwordLength = userChosenLength;
+    }
+    else {
+      criteriaForLength();
+    }
   }
   else{
+    var userChosenLength = window.prompt('Not a valid choice. Must be at least 8 characters, no longer than 128.', 8);
     criteriaForLength();
   }
   return +passwordLength;
@@ -120,14 +116,20 @@ var criteriaForSymbol = function(){
   return chooseSymbol;
 }
 
+// consolidated the functions into a Object
+var criteriaFunctions = {
+  length: criteriaForLength,
+  lower: criteriaForLowerCase,
+  upper: criteriaForUpperCase,
+  number: criteriaForNumber,
+  symbol: criteriaForSymbol,
+}
+
 
 // generate password function
 var generatedPassword = function(){
+  // empty string to store the values as they are added 
   var generatePassword = "";
-  // if (chooseLowerCase && chooseUpperCase && chooseNumber && chooseSymbol){
-  //   for (let i = 0; i <= passwordLength-1; i++){
-  //     generatePassword += 
-  //   }
   for (let i = 0; i <= +passwordLength; i++){
     if (chooseLowerCase){
       generatePassword += randomCharacterSelect.lower();
@@ -148,10 +150,8 @@ var generatedPassword = function(){
       writePassword();
     }
   }
-  
-  console.log(generatePassword = generatePassword.slice(0, passwordLength));
-  console.log(generatePassword);
-  return generatePassword;
+  console.log(generatePassword.slice(0, passwordLength).length)
+  return generatePassword.slice(0, passwordLength)
 }
 
 
@@ -160,18 +160,14 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  criteriaForLength();
-  console.log(passwordLength);
-  criteriaForLowerCase();
-  console.log(chooseLowerCase);
-  criteriaForUpperCase();
-  console.log(chooseUpperCase);
-  criteriaForNumber()
-  console.log(chooseNumber);
-  criteriaForSymbol()
-  console.log(chooseSymbol);
+  // various user critera for their password.
+  criteriaFunctions.length();
+  criteriaFunctions.lower();
+  criteriaFunctions.upper();
+  criteriaFunctions.number();
+  criteriaFunctions.symbol();
 
-  var password = generatedPassword()
+  var password = generatedPassword();
   console.log(password);
 
   var passwordText = document.querySelector("#password");
